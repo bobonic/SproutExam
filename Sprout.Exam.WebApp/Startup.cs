@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,8 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Sprout.Exam.Repositories;
 using Sprout.Exam.WebApp.Data;
 using Sprout.Exam.WebApp.Models;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Sprout.Exam.WebApp
 {
@@ -26,9 +30,13 @@ namespace Sprout.Exam.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            services.AddScoped<IDbConnection>(db => new SqlConnection(connectionString));
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(connectionString));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -43,6 +51,20 @@ namespace Sprout.Exam.WebApp
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            #region DI Registration
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            #endregion
+
+            #region Auto Mapper Configurations
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile<MappingProfile>();
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+            #endregion
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

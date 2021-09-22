@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Sprout.Exam.Business.DataTransferObjects;
 using Sprout.Exam.Common.Enums;
+using Sprout.Exam.Repositories;
 
 namespace Sprout.Exam.WebApp.Controllers
 {
-    [Authorize]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class EmployeesController : ControllerBase
+    public class EmployeesController : BaseController<IEmployeeRepository>
     {
+        public EmployeesController(IEmployeeRepository employeeRepository) : base(employeeRepository)
+        {
 
+        }
         /// <summary>
         /// Refactor this method to go through proper layers and fetch from the DB.
         /// </summary>
@@ -23,7 +24,7 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await Task.FromResult(StaticEmployees.ResultList);
+            var result = await _repository.GetAll();
             return Ok(result);
         }
 
@@ -34,7 +35,7 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var result = await Task.FromResult(StaticEmployees.ResultList.FirstOrDefault(m => m.Id == id));
+            var result = await _repository.GetById(id);
             return Ok(result);
         }
 
@@ -43,15 +44,14 @@ namespace Sprout.Exam.WebApp.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(EditEmployeeDto input)
+        public async Task<IActionResult> Put(EmployeeDto input)
         {
-            var item = await Task.FromResult(StaticEmployees.ResultList.FirstOrDefault(m => m.Id == input.Id));
-            if (item == null) return NotFound();
-            item.FullName = input.FullName;
-            item.Tin = input.Tin;
-            item.Birthdate = input.Birthdate.ToString("yyyy-MM-dd");
-            item.TypeId = input.TypeId;
-            return Ok(item);
+            var result = await _repository.Update(input.Id, input);
+            if (result)
+            {
+                return Ok(result);
+            }
+            return BadRequest(false);
         }
 
         /// <summary>
@@ -59,21 +59,14 @@ namespace Sprout.Exam.WebApp.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Post(CreateEmployeeDto input)
+        public async Task<IActionResult> Post(EmployeeDto input)
         {
-
-           var id = await Task.FromResult(StaticEmployees.ResultList.Max(m => m.Id) + 1);
-
-            StaticEmployees.ResultList.Add(new EmployeeDto
+            var result = await _repository.Create(input);
+            if (result)
             {
-                Birthdate = input.Birthdate.ToString("yyyy-MM-dd"),
-                FullName = input.FullName,
-                Id = id,
-                Tin = input.Tin,
-                TypeId = input.TypeId
-            });
-
-            return Created($"/api/employees/{id}", id);
+                return Ok(result);
+            }
+            return BadRequest(false);
         }
 
 
@@ -84,10 +77,12 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await Task.FromResult(StaticEmployees.ResultList.FirstOrDefault(m => m.Id == id));
-            if (result == null) return NotFound();
-            StaticEmployees.ResultList.RemoveAll(m => m.Id == id);
-            return Ok(id);
+            var result = await _repository.Delete(id);
+            if (result)
+            {
+                return Ok(result);
+            }
+            return BadRequest(false);
         }
 
 
@@ -100,12 +95,12 @@ namespace Sprout.Exam.WebApp.Controllers
         /// <param name="workedDays"></param>
         /// <returns></returns>
         [HttpPost("{id}/calculate")]
-        public async Task<IActionResult> Calculate(int id,decimal absentDays,decimal workedDays)
+        public async Task<IActionResult> Calculate(int id, decimal absentDays, decimal workedDays)
         {
             var result = await Task.FromResult(StaticEmployees.ResultList.FirstOrDefault(m => m.Id == id));
 
             if (result == null) return NotFound();
-            var type = (EmployeeType) result.TypeId;
+            var type = (EmployeeType)result.TypeId;
             return type switch
             {
                 EmployeeType.Regular =>

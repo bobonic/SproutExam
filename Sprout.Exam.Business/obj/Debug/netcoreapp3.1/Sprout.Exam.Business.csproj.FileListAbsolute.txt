@@ -10,3 +10,16 @@ C:\Users\jhernandez\source\repos\Sprout.Exam.WebApp\Sprout.Exam.Business\obj\Deb
 C:\Users\jhernandez\source\repos\Sprout.Exam.WebApp\Sprout.Exam.Business\bin\Debug\netcoreapp3.1\Sprout.Exam.Common.dll
 C:\Users\jhernandez\source\repos\Sprout.Exam.WebApp\Sprout.Exam.Business\bin\Debug\netcoreapp3.1\Sprout.Exam.Common.pdb
 C:\Users\jhernandez\source\repos\Sprout.Exam.WebApp\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.csproj.CopyComplete
+D:\Sprout\SproutExam\Sprout.Exam.Business\bin\Debug\netcoreapp3.1\Sprout.Exam.Business.deps.json
+D:\Sprout\SproutExam\Sprout.Exam.Business\bin\Debug\netcoreapp3.1\Sprout.Exam.Business.dll
+D:\Sprout\SproutExam\Sprout.Exam.Business\bin\Debug\netcoreapp3.1\Sprout.Exam.Business.pdb
+D:\Sprout\SproutExam\Sprout.Exam.Business\bin\Debug\netcoreapp3.1\Sprout.Exam.Common.dll
+D:\Sprout\SproutExam\Sprout.Exam.Business\bin\Debug\netcoreapp3.1\Sprout.Exam.Common.pdb
+D:\Sprout\SproutExam\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.csproj.AssemblyReference.cache
+D:\Sprout\SproutExam\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.GeneratedMSBuildEditorConfig.editorconfig
+D:\Sprout\SproutExam\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.AssemblyInfoInputs.cache
+D:\Sprout\SproutExam\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.AssemblyInfo.cs
+D:\Sprout\SproutExam\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.csproj.CoreCompileInputs.cache
+D:\Sprout\SproutExam\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.csproj.CopyComplete
+D:\Sprout\SproutExam\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.dll
+D:\Sprout\SproutExam\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.pdb
