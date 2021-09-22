@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Authorization;
 using Sprout.Exam.Business.DataTransferObjects;
 using Sprout.Exam.Common.Enums;
 using Sprout.Exam.Repositories;
+using Sprout.Exam.WebApp.Helpers;
+
+using CommonEnum = Sprout.Exam.Common.Enums;
+using Sprout.Exam.WebApp.Models;
 
 namespace Sprout.Exam.WebApp.Controllers
 {
@@ -95,22 +99,30 @@ namespace Sprout.Exam.WebApp.Controllers
         /// <param name="workedDays"></param>
         /// <returns></returns>
         [HttpPost("{id}/calculate")]
-        public async Task<IActionResult> Calculate(int id, decimal absentDays, decimal workedDays)
+        public async Task<IActionResult> Calculate(CalculateRequestModel request)
         {
-            var result = await Task.FromResult(StaticEmployees.ResultList.FirstOrDefault(m => m.Id == id));
+            EmployeeTypeFactory factory = null;
+
+
+            var result = await _repository.GetById(request.Id);
 
             if (result == null) return NotFound();
-            var type = (EmployeeType)result.TypeId;
-            return type switch
+
+            var type = (CommonEnum.EmployeeType)result.TypeId;
+
+            switch (type)
             {
-                EmployeeType.Regular =>
-                    //create computation for regular.
-                    Ok(25000),
-                EmployeeType.Contractual =>
-                    //create computation for contractual.
-                    Ok(20000),
-                _ => NotFound("Employee Type not found")
-            };
+                case CommonEnum.EmployeeType.Regular:
+                    factory = new RegularEmployeeFactory(20000, request.Days, 12);
+                    break;
+
+                case CommonEnum.EmployeeType.Contractual:
+                    factory = new ContractualEmployeeFactory (500, request.Days);
+                    break;
+            }
+
+            var item = factory.Calculate();
+            return Ok(item.Salary);
 
         }
 

@@ -76,7 +76,7 @@ export class EmployeeCreate extends Component {
     };
     const response = await fetch('api/employees',requestOptions);
 
-    if(response.status === 201){
+    if(response.status === 200){
         this.setState({ loadingSave: false });
         alert("Employee successfully saved");
         this.props.history.push("/employees/index");
