@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\views\employees\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Sprout.Exam.Business\Sprout.Exam.Business.csproj" />
     <ProjectReference Include="..\Sprout.Exam.Repositories\Sprout.Exam.Repositories.csproj" />
   </ItemGroup>
