@@ -40,6 +40,7 @@ namespace Sprout.Exam.WebApp.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _repository.GetById(id);
+            result.Birthdate = DateTime.Parse(result.Birthdate).ToString("yyyy-MM-dd");
             return Ok(result);
         }
 
