@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import authService from '../../components/api-authorization/AuthorizeService';
+import moment from 'moment';
 
 export class EmployeeEdit extends Component {
     static displayName = EmployeeEdit.name;
@@ -39,12 +40,8 @@ export class EmployeeEdit extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
-        this.validateField('fullName', '');
-        this.validateField('birthdate', '');
-        this.validateField('tin', '');
-
-        if (!this.state.formValid) {
+        
+        if (!this.validateForm()) {
             return;
         }
 
@@ -62,17 +59,17 @@ export class EmployeeEdit extends Component {
 
         switch (fieldName) {
             case 'fullName':
-                fullNameValid = this.state.fullName ? true : false;
+                fullNameValid = value ? true : false;
                 fieldValidationErrors.fullName = fullNameValid ? '' : ' is required';
                 break;
 
             case 'birthdate':
-                birthdateValid = this.state.birthdate ? true : false;
+                birthdateValid = moment(value).isValid();
                 fieldValidationErrors.birthdate = birthdateValid ? '' : ' is required';
                 break;
 
             case 'tin':
-                tinValid = this.state.tin ? true : false;
+                tinValid = value ? true : false;
                 fieldValidationErrors.tin = tinValid ? '' : ' is required';
                 break;
 
@@ -84,11 +81,33 @@ export class EmployeeEdit extends Component {
             fullNameValid: fullNameValid,
             birthdateValid: birthdateValid,
             tinValid: tinValid,
-        }, this.validateForm);
+        });
     }
 
     validateForm() {
-        this.setState({ formValid: this.state.fullNameValid && this.state.birthdateValid && this.state.tinValid });
+        let fieldValidationErrors = this.state.formErrors;
+        let fullNameValid = this.state.fullNameValid;
+        let birthdateValid = this.state.birthdateValid;
+        let tinValid = this.state.tinValid;
+
+        fullNameValid = this.state.fullName ? true : false;
+        fieldValidationErrors.fullName = fullNameValid ? '' : ' is required';
+
+        birthdateValid = moment(this.state.birthdate).isValid();
+        fieldValidationErrors.birthdate = birthdateValid ? '' : ' is required';
+
+        tinValid = this.state.tin ? true : false;
+        fieldValidationErrors.tin = tinValid ? '' : ' is required';
+
+        this.setState({
+            formErrors: fieldValidationErrors,
+            fullNameValid: fullNameValid,
+            birthdateValid: birthdateValid,
+            tinValid: tinValid,
+            formValid: (fullNameValid && birthdateValid && tinValid)
+        });
+
+        return (fullNameValid && birthdateValid && tinValid)
     }
 
     render() {
