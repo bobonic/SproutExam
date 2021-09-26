@@ -7,3 +7,13 @@ C:\Users\jhernandez\source\repos\Sprout.Exam.WebApp\Sprout.Exam.Common\obj\Debug
 C:\Users\jhernandez\source\repos\Sprout.Exam.WebApp\Sprout.Exam.Common\obj\Debug\netcoreapp3.1\Sprout.Exam.Common.csproj.CoreCompileInputs.cache
 C:\Users\jhernandez\source\repos\Sprout.Exam.WebApp\Sprout.Exam.Common\obj\Debug\netcoreapp3.1\Sprout.Exam.Common.dll
 C:\Users\jhernandez\source\repos\Sprout.Exam.WebApp\Sprout.Exam.Common\obj\Debug\netcoreapp3.1\Sprout.Exam.Common.pdb
+D:\Sprout\SproutExam\Sprout.Exam.Common\bin\Debug\netcoreapp3.1\Sprout.Exam.Common.deps.json
+D:\Sprout\SproutExam\Sprout.Exam.Common\bin\Debug\netcoreapp3.1\Sprout.Exam.Common.dll
+D:\Sprout\SproutExam\Sprout.Exam.Common\bin\Debug\netcoreapp3.1\Sprout.Exam.Common.pdb
+D:\Sprout\SproutExam\Sprout.Exam.Common\obj\Debug\netcoreapp3.1\Sprout.Exam.Common.csproj.AssemblyReference.cache
+D:\Sprout\SproutExam\Sprout.Exam.Common\obj\Debug\netcoreapp3.1\Sprout.Exam.Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\Sprout\SproutExam\Sprout.Exam.Common\obj\Debug\netcoreapp3.1\Sprout.Exam.Common.AssemblyInfoInputs.cache
+D:\Sprout\SproutExam\Sprout.Exam.Common\obj\Debug\netcoreapp3.1\Sprout.Exam.Common.AssemblyInfo.cs
+D:\Sprout\SproutExam\Sprout.Exam.Common\obj\Debug\netcoreapp3.1\Sprout.Exam.Common.csproj.CoreCompileInputs.cache
+D:\Sprout\SproutExam\Sprout.Exam.Common\obj\Debug\netcoreapp3.1\Sprout.Exam.Common.dll
+D:\Sprout\SproutExam\Sprout.Exam.Common\obj\Debug\netcoreapp3.1\Sprout.Exam.Common.pdb

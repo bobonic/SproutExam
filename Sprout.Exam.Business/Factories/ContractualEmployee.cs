@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Sprout.Exam.WebApp.Helpers
+namespace Sprout.Exam.Business.Factories
 {
-    public class RegularEmployee : EmployeeType
+    public class ContractualEmployee : EmployeeType
     {
         private readonly decimal salary;
         private decimal rate;
         private decimal days;
         private decimal tax;
 
-        public RegularEmployee(decimal rate, decimal days, decimal tax)
+        public ContractualEmployee(decimal rate, decimal days, decimal tax)
         {
             this.rate = rate;
             this.days = days;
@@ -21,16 +21,13 @@ namespace Sprout.Exam.WebApp.Helpers
 
         public override decimal Salary
         {
-            get 
+            get
             {
-                var tax = this.rate * (this.tax / 100);
-                var dailyRate = (this.rate / 22) * days;
-                var salary = rate - (dailyRate + tax);
+                var salary = this.rate * this.days;
 
-                return salary; 
+                return salary;
             }
         }
-
         public override decimal Rate
         {
             set { this.rate = value; }

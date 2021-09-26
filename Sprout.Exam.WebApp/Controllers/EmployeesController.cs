@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Sprout.Exam.Business.DataTransferObjects;
 using Sprout.Exam.Common.Enums;
 using Sprout.Exam.Repositories;
-using Sprout.Exam.WebApp.Helpers;
+using Sprout.Exam.Business.Factories;
 
 using CommonEnum = Sprout.Exam.Common.Enums;
 using Sprout.Exam.WebApp.Models;
@@ -114,11 +114,11 @@ namespace Sprout.Exam.WebApp.Controllers
             switch (type)
             {
                 case CommonEnum.EmployeeType.Regular:
-                    factory = new RegularEmployeeFactory(20000, request.Days, 12);
+                    factory = new RegularEmployeeFactory((decimal)EmployeeTypeRates.Regular, request.Days, 12);
                     break;
 
                 case CommonEnum.EmployeeType.Contractual:
-                    factory = new ContractualEmployeeFactory (500, request.Days);
+                    factory = new ContractualEmployeeFactory((decimal)EmployeeTypeRates.Contractual, request.Days);
                     break;
             }
 

@@ -9,4 +9,10 @@ namespace Sprout.Exam.Common.Enums
         Regular = 1,
         Contractual = 2
     }
+
+    public enum EmployeeTypeRates
+    {
+        Regular = 20000,
+        Contractual = 500
+    }
 }

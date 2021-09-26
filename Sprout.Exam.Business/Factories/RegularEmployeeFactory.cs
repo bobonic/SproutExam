@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Sprout.Exam.WebApp.Helpers
+namespace Sprout.Exam.Business.Factories
 {
-    public class ContractualEmployeeFactory : EmployeeTypeFactory
+    public class RegularEmployeeFactory : EmployeeTypeFactory
     {
         private decimal rate;
         private decimal days;
         private decimal tax;
 
-        public ContractualEmployeeFactory(decimal rate, decimal days)
+        public RegularEmployeeFactory(decimal rate, decimal days, decimal tax)
         {
             this.rate = rate;
             this.days = days;
+            this.tax = tax;
         }
 
         public override EmployeeType Calculate()
         {
-            return new ContractualEmployee(rate, days, tax);
+            return new RegularEmployee(rate, days, tax);
         }
     }
 }
